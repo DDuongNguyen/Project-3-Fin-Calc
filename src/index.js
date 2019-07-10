@@ -70,10 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 })
-// -------------------------end of DOMContentLoaded--------------------------------
+
+// ------------read existing record from the database------------------
+  fetchRecords()
+
+// ------------delete button event listener-------------
+  document.querySelector('#record-list').addEventListener('click', () => clickDelegation(event))
+
+// -------------------------------------------------------------------------------
+// -------------------------END OF DOMContentLoaded--------------------------------
 // --------------------------------------------------------------------------------
 
-// ---------------labeling the inputs
+// -------------------------------LOGIK----------------------------------------------
+// ---------------labeling the inputs----------------------------------------
 function labelingInput(
   ageLabel,
   retirementAgeLabel,
@@ -174,7 +183,6 @@ function slapOutput(
   taxRate,
   safeWithdrawalRate,
   outputDiv){
-
   const fundsAtRetirement = fundsToday * Math.pow(1 + investmentGainRate, retirementAge - age);
   const targetFunds = retirementExpenses * Math.pow(1 + inflationRate, retirementAge - age) / (1 - taxRate) / safeWithdrawalRate;
 
@@ -232,6 +240,17 @@ function updateLabel(){
 
 }
 
+// ----------------------Click delegation-----------------------------------
+function clickDelegation(event){
+if(event.target.className === "delete_button"){
+  fetchRemoveRecord(event)
+}
+}
+
+// ----------------------------------------------------------------------------
+// ------------------------END OF LOGIK-----------------------------------------
+// --------------------------------------------------------------------------------
+
 // -----------------------Fetching---------------------------------------------
 function fetchCreateRecord(
 fundsToday,
@@ -243,8 +262,7 @@ inflationRate,
 taxRate,
 safeWithdrawalRate,
 targetFunds,
-fundsAtRetirement)
-{
+fundsAtRetirement){
 event.preventDefault()
 fetch('http://localhost:3000/records',{
 method:'POST',
@@ -257,12 +275,76 @@ body: JSON.stringify({
   saving_balance: fundsToday,
   age: age,
   retirement_age: retirementAge,
-  safe_withdrawal_rate: safeWithdrawalRate,
-  investment_growth: investmentGainRate,
-  inflation: inflationRate,
-  tax_rate: taxRate,
+  safe_withdrawal_rate: safeWithdrawalRate*100,
+  investment_growth: investmentGainRate*100,
+  inflation: inflationRate*100,
+  tax_rate: taxRate*100,
   target_fund: targetFunds ,
   fund_at_retirement: fundsAtRetirement
 })
 })
+.then(resp => resp.json())
+.then(slapNewRecord)
 }
+
+function fetchRecords(){
+  fetch('http://localhost:3000/records')
+  .then(resp => resp.json())
+  .then(slapRecords)
+}
+
+function fetchRemoveRecord(event){
+  // debugger
+  recordId = event.target.dataset.deleteid
+  fetch(`http://localhost:3000/records/${recordId}`,{
+  method: "delete"})
+  event.target.parentElement.parentElement.remove()
+}
+
+// ------------------------------------------------------------------------
+// -----------------------END OF FETCHING--------------------------------------
+// ---------------------------------------------------------------------------
+
+// -------------------SLAP ON DOMS------------------------------------------
+
+function slapNewRecord(data){
+  recordList= document.querySelector("#record-list")
+  recordList.innerHTML+=`
+  <li data-recordId= "${data.id}">
+  <h5>User: ${data.user_id}- Scenario: ${data.id} <button class='delete_button' data-deleteId=${data.id} >DELETE</button> </h5>
+  <p>Target retirement age: ${data.retirement_age}</p>
+  <p>Current Retirement Account Balance: ${data.saving_balance}</p>
+  <p>Retirement Annual Expenses: ${data.annual_expense}</p>
+  <p>${data.investment_growth}% annual investment growth rate</p>
+  <p>${data.inflation}% annual expense inflation rate</p>
+  <p>${data.tax_rate}% tax rate on retirement withdrawals</p>
+  <p>${data.safe_withdrawal_rate}% safe withdrawal rate</p>
+  <h5>To retire at ${data.retirement_age}, you'll need ${toCurrency(data.target_fund)}</h5>
+  <h5>Based on what you entered, at ${data.retirement_age}, you would have ${toCurrency(data.fund_at_retirement)}</h5>
+  </li>
+  `
+}
+
+function slapRecords(datas){
+  recordList= document.querySelector("#record-list")
+  // debugger
+  datas.forEach(data => {
+  recordList.innerHTML+=`
+  <li data-recordId= "${data.id}">
+  <h5>User: ${data.user_id}- Scenario: ${data.id} <button class='delete_button' data-deleteId=${data.id} >DELETE</button> </h5>
+  <p>Target retirement age: ${data.retirement_age}</p>
+  <p>Current Retirement Account Balance: ${data.saving_balance}</p>
+  <p>Retirement Annual Expenses: ${data.annual_expense}</p>
+  <p>${data.investment_growth}% annual investment growth rate</p>
+  <p>${data.inflation}% annual expense inflation rate</p>
+  <p>${data.tax_rate}% tax rate on retirement withdrawals</p>
+  <p>${data.safe_withdrawal_rate}% safe withdrawal rate</p>
+  <h5>To retire at ${data.retirement_age}, you'll need ${toCurrency(data.target_fund)}</h5>
+  <h5>Based on what you entered, at ${data.retirement_age}, you would have ${toCurrency(data.fund_at_retirement)}</h5>
+  </li>
+  `
+})
+}
+// ------------------------------------------------------------------------
+// -------------------END OF SLAPPIN----------------------------------------------
+// --------------------------------------------------------------------------
