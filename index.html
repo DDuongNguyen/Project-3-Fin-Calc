@@ -1,41 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Fin-Calculator</title>
-  </head>
-  <body>
-    <h1>Fin Calculator</h1>
-    <form id="input_form">
-      <input id="annual_epense" type="integer" name="annual_epense" placeholder="Annual Expense"/>
-      <br />
-      <br />
-      <input id="saving_balance" type="integer" name="saving_balance" placeholder="Saving Balance"/>
-      <br />
-      <br />
-      <input id="birth_date" type="integer" name="birth_date" placeholder="Birth Date"/>
-      <br />
-      <br />
-      <input id="retirement_age" type="integer" name="retirement_age" placeholder="Retirement Age"/>
-      <br />
-      <br />
-      <input id="withdrawal_rate" type="integer" name="withdrawal_rate" placeholder="Withdrawal Rate"/>
-      <br />
-      <br />
-      <input id="monthly_saving" type="integer" name="monthly_saving" placeholder="Monthly Saving"/>
-      <br />
-      <br />
-      <input id="investent_growth" type="integer" name="investent_growth" placeholder="Investent Growth"/>
-      <br />
-      <br />
-      <input id="inflation_rate" type="integer" name="inflation_rate" placeholder="Inflation Rate"/>
-      <br />
-      <br />
-      <input id="tax_rate" type="integer" name="tax_rate" placeholder="Tax Rate"/>
-      <br />
-      <br />
-      <input type="submit" value="Submit"/>
+
+<head>
+  <meta charset="utf-8">
+  <title>Fin-Calculator</title>
+</head>
+
+<body>
+  <h1>Retirement Calculator</h1>
+
+  <div class="calculator" id="retirement-calculator">
+    <p class="calculator-description">Enter your numbers to see if you can retire</p>
+
+    <form id = 'calculation'>
+        <div class="calculator-input">
+          <label id="age-label"></label><br>
+          <input value="30" class="calculator-slider" min="0" max="100" step="1" type="range" id="age">
+        </div>
+
+        <div class="calculator-input">
+          <label id="retirement-age-label"></label><br>
+          <input value="65" class="calculator-slider" min="0" max="100" step="1" type="range" id="retirement-age">
+        </div>
+
+        <div class="calculator-input">
+          <label>Current Retirement Account Balance</label><br>
+          <input type="number" value="10000" min="0" value="0" id="funds-today">
+        </div>
+
+        <div class="calculator-input">
+          <label>Retirement Annual Expenses</label><br>
+          <input type="number" value="5000" min="0" value="0" id="retirement-expenses">
+        </div>
+
+        <div class="calculator-input">
+          <label id="investment-growth-label"></label><br>
+          <input value="8" class="calculator-slider" min="0.25" max="20" step="0.25" type="range" id="investment-growth">
+        </div>
+
+        <div class="calculator-input">
+          <label id="inflation-label"></label><br>
+          <input value="2.5" class="calculator-slider" min="0.25" max="20" step="0.25" type="range" id="inflation">
+        </div>
+
+        <div class="calculator-input">
+          <label id="tax-label"></label><br>
+          <input value="15" class="calculator-slider" min="0" max="99" step="1" type="range" id="tax">
+        </div>
+
+        <div class="calculator-input">
+          <label id="safe-withdrawal-label"></label><br>
+          <input value="4" class="calculator-slider" min="0.25" max="20" step="0.25" type="range" id="safe-withdrawal">
+        </div>
+
+        <button id='calculate'>Calculate</button>
+
+        <div id="retirement-result">
+          
+        </div>
+
+        <button id="save">Save Result</button>
+
     </form>
-    <script type="text/javascript" src='src/index.js'></script>
-  </body>
+  </div>
+  <script type="text/javascript" src='src/index.js'></script>
+
+</body>
+
 </html>
