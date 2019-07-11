@@ -4,15 +4,18 @@
 <head>
   <meta charset="utf-8">
   <title>Fin-Calculator</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
+  <div class="headers">
   <h1>Retirement Calculator</h1>
+  <p class="calculator-description">Enter your numbers to see if you can retire</p>
+  </div>
 
-  <div class="calculator" id="retirement-calculator">
-    <p class="calculator-description">Enter your numbers to see if you can retire</p>
-
-    <form id = 'calculation'>
+  <div class='APP'>
+    <div class="calculator" id="retirement-calculator">
+      <form id='calculation'>
         <div class="calculator-input">
           <label id="age-label"></label><br>
           <input value="30" class="calculator-slider" min="0" max="100" step="1" type="range" id="age">
@@ -58,18 +61,27 @@
         <div id="retirement-result">
 
         </div>
+        <button id="save" class='hidden'>Save Result</button>
 
-        <button id="save">Save Result</button>
 
-    </form>
+      </form>
+
+    </div>
+
+    <div class="record-div">
+      <ul id='record-list'>
+
+      </ul>
+    </div>
+
+    <div class="a-cat">
+      <img src="http://24.media.tumblr.com/90465b3b6a901581274a31b6747db8c3/tumblr_mnig1u59cI1s5jjtzo1_400.gif" alt="">
+    </div>
   </div>
 
-  <ul id= 'record-list'>
-
-  </ul>
 
   <script type="text/javascript" src='src/index.js'></script>
-
+  <script type="text/javascript" src='src/collapsible.js'></script>
 </body>
 
 </html>

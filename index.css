@@ -1,0 +1,133 @@
+ .listed-record {
+  /* background-color: pink; */
+  border-color: black;
+  border-width: thin;
+  border-style: groove;
+  width: 100%;
+  text-align: center;
+  color: #444;
+  cursor: pointer;
+  padding-bottom: 15px;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+
+}
+
+.active, .listed-record:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+
+
+
+
+
+ul{
+list-style-type: none;
+margin: auto;
+padding: 0;
+}
+
+li{
+  margin:auto;
+}
+
+.collapsible {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  /* width: 111%; */
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.record-content {
+  padding: inherit;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  /* width: auto%; */
+  margin: auto;
+  font-size: 14px;
+}
+
+button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.delete_button{
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #555;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+  .delete_button:hover {background-color: red}
+
+.hidden{
+  display: none;
+}
+
+.APP {
+  display: flex;
+  background-color: DodgerBlue;
+  flex-wrap: wrap;
+}
+
+.APP > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 20px;
+  /* font-size: 30px; */
+}
+
+#retirement-calculator{
+  zoom: 100%;
+}
+
+.record-div{
+overflow-y: scroll;
+max-height: 518px;
+width: 32%;
+}
+
+.headers{
+  text-align: center;
+}
