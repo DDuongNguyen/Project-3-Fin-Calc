@@ -2,8 +2,6 @@
 
 Retirement Catculator is an app that calculate users ability to retire based upon their inputs.
 
-This is a Ruby on Rails API created using ActiveRecord.
-
 ## How to Install and Open Retirement Catculator
 1. Use your terminal to navigate into the place where you want to clone The NeighborHood directory and `git clone` the url.
 2. Open the cloned folder and open `index.html` file
